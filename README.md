@@ -81,6 +81,50 @@ pnpm dev
 
 ---
 
+## Setup: n8n-mcp
+
+[czlonkowski/n8n-mcp](https://github.com/czlonkowski/n8n-mcp) — Claude Code / Claude Desktop için n8n workflow otomasyonu MCP sunucusu (TypeScript, 1.396 node, 2.709 şablon).
+
+### Installation Steps
+
+```bash
+git clone https://github.com/czlonkowski/n8n-mcp.git ~/n8n-mcp
+cd ~/n8n-mcp
+
+# xlsx SheetJS CDN engellenirse npm registry override ekle:
+# package.json → overrides → "xlsx": "0.18.5"
+
+npm install
+npm run build   # TypeScript → dist/
+```
+
+### MCP Configuration (`.mcp.json`)
+
+```json
+{
+  "mcpServers": {
+    "n8n-mcp": {
+      "command": "node",
+      "args": ["/home/user/n8n-mcp/dist/mcp/index.js"],
+      "env": {
+        "MCP_MODE": "stdio",
+        "LOG_LEVEL": "error",
+        "DISABLE_CONSOLE_OUTPUT": "true",
+        "N8N_MCP_TELEMETRY_DISABLED": "true"
+      }
+    }
+  }
+}
+```
+
+### Results
+
+- **Build:** `dist/mcp/index.js` başarıyla derlendi
+- **Smoke test:** MCP server stdio modunda başlatılabiliyor
+- **Kapsam:** 1.396 n8n node, 2.709 workflow şablonu, 7 doc aracı + 13 yönetim aracı
+
+---
+
 ## Connect
 
 Feel free to explore my repositories and reach out!
